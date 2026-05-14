@@ -11,7 +11,7 @@
 bool systemStarted = false;
 bool lastBtnState = HIGH;
 
-/* ---------- МОТОРЫ ---------- */
+/* ---------- Motors ---------- */
 #define F1_A 25
 #define F1_B 26
 #define F2_A 27
@@ -59,10 +59,6 @@ void brushesStop() {
   digitalWrite(Brush2_B, LOW);
 }
 
-/* ---------- УНИВЕРСАЛЬНЫЕ МОТОРЫ ---------- */
-/* Передние: digitalWrite */
-/* Задние: ledcWrite */
-
 void motorForward(int pinA, int pinB, int speed2 = 255) {
   if (pinA == B1_A && pinB == B1_B) {
     ledcWrite(CH_B1A, speed2);
@@ -108,8 +104,6 @@ void motorStop(int pinA, int pinB) {
   }
 }
 
-/* ---------- ТВОЯ ЛОГИКА ДВИЖЕНИЯ ---------- */
-
 void moveForward() {
   motorForward(B1_A, B1_B, MOTOR_SPEED);
   motorForward(B2_A, B2_B, MOTOR_SPEED);
@@ -125,8 +119,6 @@ void moveBackward() {
 
   brushesStop();
 }
-
-/* ---------- ТВОИ ПОВОРОТЫ ---------- */
 
 void turnLeft() {
   motorForward(F1_A, F1_B);
@@ -159,8 +151,6 @@ void shutdownAll() {
   moveStopAll();
   digitalWrite(DRIVER_EN, LOW);
 }
-
-/* ---------- ДАТЧИК ---------- */
 
 float readDistance() {
   digitalWrite(TRIG, LOW);
